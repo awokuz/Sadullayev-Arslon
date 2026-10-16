@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* Standart cursorni yashirish */
+            cursor: none;
         }
 
         body {
@@ -17,19 +17,19 @@
             color: #c9d1d9;
             line-height: 1.6;
             overflow-x: hidden;
-            background: #0d1117;
+            background: #1a2332;
         }
 
-        /* Custom Cursor */
+        /* ========== CUSTOM CURSOR + GLOW ========== */
         .cursor {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border: 2px solid #58a6ff;
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.1s;
+            transition: transform 0.15s, border-color 0.3s;
             mix-blend-mode: difference;
         }
 
@@ -41,6 +41,19 @@
             position: fixed;
             pointer-events: none;
             z-index: 9999;
+            box-shadow: 0 0 10px #58a6ff, 0 0 20px #58a6ff;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(88, 166, 255, 0.25) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 9997;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
         }
 
         .cursor-trail {
@@ -52,25 +65,20 @@
             pointer-events: none;
             z-index: 9998;
             animation: fadeOut 1s forwards;
+            box-shadow: 0 0 8px rgba(88, 166, 255, 0.8);
         }
 
         @keyframes fadeOut {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(0);
-                opacity: 0;
-            }
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
         }
 
-        /* Orqa fon animatsiyalari */
+        /* ========== ORQA FON ========== */
         .bg-gradient {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: linear-gradient(-45deg, #0d1117, #1a1f3a, #0f3460, #16213e, #0d1117);
+            background: linear-gradient(-45deg, #1a2332, #2a3a52, #1f3a5f, #253d5c, #1a2332);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             z-index: -4;
@@ -88,7 +96,7 @@
             width: 100%; height: 100%;
             z-index: -3;
             overflow: hidden;
-            opacity: 0.5;
+            opacity: 0.4;
         }
 
         .aurora {
@@ -98,9 +106,9 @@
             top: -50%;
             left: -50%;
             background: 
-                radial-gradient(ellipse at 20% 50%, rgba(88, 166, 255, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 50%, rgba(63, 185, 80, 0.2) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 50%, rgba(88, 166, 255, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(63, 185, 80, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%);
             animation: auroraMove 20s ease-in-out infinite;
             filter: blur(60px);
         }
@@ -127,7 +135,7 @@
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
+            0%, 100% { opacity: 0.3; transform: scale(1); }
             50%      { opacity: 1;   transform: scale(1.3); }
         }
 
@@ -142,22 +150,16 @@
         .particle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(88, 166, 255, 0.4);
+            background: rgba(88, 166, 255, 0.5);
             animation: floatUp var(--duration) linear infinite;
             bottom: -100px;
         }
 
         @keyframes floatUp {
-            0% {
-                transform: translateY(0) translateX(0) scale(1);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% {
-                transform: translateY(-110vh) translateX(var(--drift)) scale(0.5);
-                opacity: 0;
-            }
+            100% { transform: translateY(-110vh) translateX(var(--drift)) scale(0.5); opacity: 0; }
         }
 
         .shooting-star {
@@ -181,21 +183,15 @@
         }
 
         @keyframes shoot {
-            0% {
-                transform: translate(0, 0) rotate(-45deg);
-                opacity: 0;
-            }
+            0% { transform: translate(0, 0) rotate(-45deg); opacity: 0; }
             5% { opacity: 1; }
-            15% {
-                transform: translate(-400px, 400px) rotate(-45deg);
-                opacity: 0;
-            }
+            15% { transform: translate(-400px, 400px) rotate(-45deg); opacity: 0; }
             100% { opacity: 0; }
         }
 
-        /* Navbar */
+        /* ========== NAVBAR ========== */
         nav {
-            background: rgba(22, 27, 34, 0.8);
+            background: rgba(26, 35, 50, 0.85);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             padding: 15px 40px;
@@ -206,7 +202,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+            border-bottom: 1px solid rgba(88, 166, 255, 0.2);
         }
 
         nav .logo {
@@ -229,11 +225,9 @@
             transition: color 0.3s;
         }
 
-        nav ul li a:hover {
-            color: #58a6ff;
-        }
+        nav ul li a:hover { color: #58a6ff; }
 
-        /* Hero */
+        /* ========== HERO ========== */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -249,20 +243,27 @@
             z-index: 1;
         }
 
-        .hero .avatar {
+        /* AVATAR RASM */
+        .avatar {
             width: 160px;
             height: 160px;
             border-radius: 50%;
-            border: 4px solid #58a6ff;
-            margin-bottom: 25px;
+            margin: 0 auto 25px;
+            display: block;
             object-fit: cover;
-            box-shadow: 0 0 30px rgba(88, 166, 255, 0.5);
+            border: 4px solid rgba(88, 166, 255, 0.6);
+            box-shadow: 0 0 40px rgba(88, 166, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.1);
             animation: pulseGlow 3s ease-in-out infinite;
+            transition: transform 0.3s;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
         }
 
         @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 30px rgba(88, 166, 255, 0.5); }
-            50%      { box-shadow: 0 0 50px rgba(88, 166, 255, 0.8); }
+            0%, 100% { box-shadow: 0 0 40px rgba(88, 166, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.1); }
+            50%      { box-shadow: 0 0 60px rgba(88, 166, 255, 0.9), inset 0 0 20px rgba(255, 255, 255, 0.2); }
         }
 
         .hero h1 {
@@ -281,7 +282,7 @@
 
         .hero p {
             font-size: 1.05rem;
-            color: #8b949e;
+            color: #b0b8c4;
             margin-bottom: 30px;
             animation: fadeInUp 1s ease 0.4s backwards;
         }
@@ -323,7 +324,7 @@
             box-shadow: 0 5px 20px rgba(88, 166, 255, 0.3);
         }
 
-        /* Sections */
+        /* ========== SECTIONS ========== */
         section {
             padding: 80px 40px;
             max-width: 1000px;
@@ -335,7 +336,7 @@
         section h2 {
             font-size: 2rem;
             color: #f0f6fc;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             text-align: center;
             position: relative;
         }
@@ -350,6 +351,7 @@
             border-radius: 2px;
         }
 
+        /* ========== ABOUT ========== */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -359,17 +361,15 @@
 
         .about-text p {
             margin-bottom: 15px;
-            color: #8b949e;
+            color: #b0b8c4;
             font-size: 1.05rem;
         }
 
-        .info-list {
-            list-style: none;
-        }
+        .info-list { list-style: none; }
 
         .info-list li {
             padding: 10px 0;
-            border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+            border-bottom: 1px solid rgba(88, 166, 255, 0.15);
             display: flex;
             justify-content: space-between;
         }
@@ -377,9 +377,11 @@
         .info-list li span:first-child { color: #8b949e; }
         .info-list li span:last-child  { color: #f0f6fc; font-weight: 500; }
 
+        /* ========== KARTALAR ========== */
         .skills-grid, .projects-grid, .contact-grid {
             display: grid;
-            gap: 20px;
+            gap: 25px;
+            position: relative;
         }
 
         .skills-grid      { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
@@ -387,19 +389,58 @@
         .contact-grid     { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 
         .skill-card, .project-card, .contact-card {
-            background: rgba(22, 27, 34, 0.7);
+            background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(48, 54, 61, 0.5);
-            border-radius: 12px;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            border-radius: 16px;
             padding: 25px;
-            transition: all 0.3s;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .skill-card::before, .project-card::before, .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(88, 166, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            transition: all 0.4s;
+        }
+
+        .skill-card::after, .project-card::after, .contact-card::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -30%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(63, 185, 80, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            transition: all 0.4s;
         }
 
         .skill-card:hover, .project-card:hover, .contact-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: #58a6ff;
-            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(88, 166, 255, 0.25);
+        }
+
+        .skill-card:hover::before, .project-card:hover::before, .contact-card:hover::before {
+            transform: scale(1.5);
+            background: radial-gradient(circle, rgba(88, 166, 255, 0.3) 0%, transparent 70%);
+        }
+
+        .skill-card:hover::after, .project-card:hover::after, .contact-card:hover::after {
+            transform: scale(1.5);
+            background: radial-gradient(circle, rgba(63, 185, 80, 0.2) 0%, transparent 70%);
         }
 
         .skill-card .icon, .contact-card .icon {
@@ -416,7 +457,7 @@
         .project-card h3 { color: #58a6ff; font-size: 1.2rem; }
 
         .skill-card p, .project-card p {
-            color: #8b949e;
+            color: #b0b8c4;
             font-size: 0.9rem;
             margin-bottom: 15px;
         }
@@ -448,11 +489,12 @@
         }
 
         .project-card .tags span {
-            background: rgba(33, 38, 45, 0.8);
-            color: #8b949e;
+            background: rgba(88, 166, 255, 0.15);
+            color: #58a6ff;
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.8rem;
+            border: 1px solid rgba(88, 166, 255, 0.3);
         }
 
         .contact-card a {
@@ -466,7 +508,7 @@
         footer {
             text-align: center;
             padding: 30px;
-            border-top: 1px solid rgba(48, 54, 61, 0.5);
+            border-top: 1px solid rgba(88, 166, 255, 0.2);
             color: #8b949e;
             font-size: 0.9rem;
             position: relative;
@@ -481,14 +523,17 @@
             .hero h1 { font-size: 2rem; }
             .about-grid { grid-template-columns: 1fr; }
             section { padding: 60px 20px; }
+            .cursor, .cursor-dot, .cursor-glow { display: none; }
+            * { cursor: auto; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Custom Cursor -->
+    <!-- Custom Cursor + Glow -->
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
+    <div class="cursor-glow"></div>
 
     <!-- Animatsiyali Orqa Fon -->
     <div class="bg-gradient"></div>
@@ -510,9 +555,8 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <!-- RASM QO'SHISH: GitHub avatar yoki o'z rasmingiz -->
-            <img src="https://avatars.githubusercontent.com/u/awokuz" alt="Arslon" class="avatar">
-            <!-- Yoki o'z rasmingiz: <img src="me.jpg" alt="Arslon" class="avatar"> -->
+            <!-- O'Z RASMINGIZ -->
+            <img src="110569765547bdeaa46403ad7bc51169.jpg" alt="Arslon Sadullayev" class="avatar">
             
             <h1>Arslon Sadullayev</h1>
             <p class="subtitle">Web Developer</p>
@@ -533,213 +577,4 @@
             <ul class="info-list">
                 <li><span>Ism</span><span>Arslon Sadullayev</span></li>
                 <li><span>Joylashuv</span><span>O'zbekiston</span></li>
-                <li><span>Til</span><span>O'zbek, Rus, Ingliz</span></li>
-                <li><span>Holat</span><span>Ishga tayyor</span></li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills">
-        <h2>Ko'nikmalar</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <span class="icon">🌐</span>
-                <h3>HTML5</h3>
-                <p>Semantik va toza kod</p>
-                <div class="skill-bar"><div class="fill" style="width: 90%"></div></div>
-            </div>
-            <div class="skill-card">
-                <span class="icon">🎨</span>
-                <h3>CSS3</h3>
-                <p>Responsive dizayn</p>
-                <div class="skill-bar"><div class="fill" style="width: 80%"></div></div>
-            </div>
-            <div class="skill-card">
-                <span class="icon">⚡</span>
-                <h3>JavaScript</h3>
-                <p>Interaktiv ilovalar</p>
-                <div class="skill-bar"><div class="fill" style="width: 70%"></div></div>
-            </div>
-            <div class="skill-card">
-                <span class="icon">🔧</span>
-                <h3>Git & GitHub</h3>
-                <p>Versiya nazorati</p>
-                <div class="skill-bar"><div class="fill" style="width: 75%"></div></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects">
-        <h2>Loyihalar</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3>Portfolio Sayt</h3>
-                <p>Shaxsiy portfolio veb-sayti. GitHub Pages orqali deploy qilingan.</p>
-                <div class="tags"><span>HTML</span><span>CSS</span><span>GitHub Pages</span></div>
-            </div>
-            <div class="project-card">
-                <h3>📌 Loyiha 2</h3>
-                <p>Bu yerda keyingi loyihangiz haqida ma'lumot yozing.</p>
-                <div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
-            </div>
-            <div class="project-card">
-                <h3>📌 Loyiha 3</h3>
-                <p>Kelajakdagi loyihalaringizni shu yerga qo'shing.</p>
-                <div class="tags"><span>React</span><span>Node.js</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-        <h2>Aloqa</h2>
-        <div class="contact-grid">
-            <div class="contact-card">
-                <span class="icon">📧</span>
-                <h3>Email</h3>
-                <a href="mailto:example@mail.com">uzawok@mail.com</a>
-            </div>
-            <div class="contact-card">
-                <span class="icon">💬</span>
-                <h3>Telegram</h3>
-                <a href="https://t.me/username" target="_blank">@uzaw0k 
-                @uzawok</a>
-            </div>
-            <div class="contact-card">
-                <span class="icon">🐙</span>
-                <h3>GitHub</h3>
-                <a href="https://github.com/Arslon-Sadullayev" target="_blank">Arslon-Sadullayev</a>
-            </div>
-            <div class="contact-card">
-                <span class="icon">💼</span>
-                <h3>LinkedIn</h3>
-                <a href="#" target="_blank">Profil</a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2026 Arslon Sadullayev. Barcha huquqlar himoyalangan.</p>
-    </footer>
-
-    <script>
-        // ========== CUSTOM CURSOR ==========
-        const cursor = document.querySelector('.cursor');
-        const cursorDot = document.querySelector('.cursor-dot');
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            cursorDot.style.left = mouseX - 4 + 'px';
-            cursorDot.style.top = mouseY - 4 + 'px';
-            
-            // Cursor trail yaratish
-            createTrail(mouseX, mouseY);
-        });
-
-        // Smooth cursor harakati
-        function animateCursor() {
-            cursorX += (mouseX - cursorX) * 0.1;
-            cursorY += (mouseY - cursorY) * 0.1;
-            
-            cursor.style.left = cursorX - 10 + 'px';
-            cursor.style.top = cursorY - 10 + 'px';
-            
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Cursor trail effekti
-        let trailCount = 0;
-        function createTrail(x, y) {
-            trailCount++;
-            if (trailCount % 3 === 0) { // Har 3 harakatda bir marta
-                const trail = document.createElement('div');
-                trail.className = 'cursor-trail';
-                trail.style.left = x - 5 + 'px';
-                trail.style.top = y - 5 + 'px';
-                document.body.appendChild(trail);
-                
-                setTimeout(() => trail.remove(), 1000);
-            }
-        }
-
-        // Hover effekti
-        document.querySelectorAll('a, button, .btn').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(1.5)';
-                cursor.style.borderColor = '#3fb950';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursor.style.borderColor = '#58a6ff';
-            });
-        });
-
-        // ========== YULDUZLAR ==========
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 150; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            const size = Math.random() * 2 + 0.5;
-            star.style.width = size + 'px';
-            star.style.height = size + 'px';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-            star.style.animationDelay = Math.random() * 5 + 's';
-            starsContainer.appendChild(star);
-        }
-
-        // Uchuvchi yulduzlar
-        function createShootingStar() {
-            const star = document.createElement('div');
-            star.className = 'shooting-star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 50 + '%';
-            star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            starsContainer.appendChild(star);
-            setTimeout(() => star.remove(), 4000);
-        }
-        setInterval(createShootingStar, 3000);
-
-        // ========== ZARRACHALAR ==========
-        const particlesContainer = document.getElementById('particles');
-        const colors = [
-            'rgba(88, 166, 255, 0.4)',
-            'rgba(63, 185, 80, 0.3)',
-            'rgba(139, 92, 246, 0.3)',
-            'rgba(248, 81, 73, 0.2)'
-        ];
-
-        for (let i = 0; i < 25; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            const size = Math.random() * 8 + 3;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.setProperty('--duration', (Math.random() * 15 + 10) + 's');
-            particle.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
-            particle.style.animationDelay = Math.random() * 10 + 's';
-            particlesContainer.appendChild(particle);
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
-
-</body>
-</html>
+               
