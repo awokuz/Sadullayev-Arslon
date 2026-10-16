@@ -21,7 +21,7 @@
             color: #c9d1d9;
             line-height: 1.6;
             overflow-x: hidden;
-            background: #1a2332;
+            background: #0f172a;
         }
 
         /* ========== CURSOR ========== */
@@ -33,7 +33,6 @@
             pointer-events: none;
             z-index: 99999;
             transition: transform 0.15s, border-color 0.3s;
-            mix-blend-mode: difference;
         }
 
         .cursor-dot {
@@ -56,62 +55,15 @@
             transform: translate(-50%, -50%);
         }
 
-        .cursor-trail {
-            position: fixed;
-            width: 10px; height: 10px;
-            border-radius: 50%;
-            background: rgba(88, 166, 255, 0.6);
-            pointer-events: none;
-            z-index: 99998;
-            animation: fadeOut 1s forwards;
-        }
-
-        @keyframes fadeOut {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(0); opacity: 0; }
-        }
-
         /* ========== ORQA FON ========== */
         .bg-gradient {
             position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
-            background: linear-gradient(-45deg, #1a2332, #2a3a52, #1f3a5f, #253d5c, #1a2332);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
             z-index: -4;
         }
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .bg-aurora {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -3; opacity: 0.4;
-        }
-
-        .aurora {
-            position: absolute;
-            width: 200%; height: 200%;
-            top: -50%; left: -50%;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(88, 166, 255, 0.4) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 50%, rgba(63, 185, 80, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%);
-            animation: auroraMove 20s ease-in-out infinite;
-            filter: blur(60px);
-        }
-
-        @keyframes auroraMove {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(10%, 5%) rotate(5deg); }
-            50% { transform: translate(-5%, 10%) rotate(-3deg); }
-            75% { transform: translate(-10%, -5%) rotate(3deg); }
-        }
-
-        .bg-stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
+        .bg-stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; }
         .star {
             position: absolute;
             background: white;
@@ -120,20 +72,20 @@
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
         }
 
         .bg-particles {
             position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: -1; overflow: hidden;
+            z-index: -2; overflow: hidden;
         }
 
         .particle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(88, 166, 255, 0.5);
+            background: rgba(88, 166, 255, 0.3);
             animation: floatUp var(--duration) linear infinite;
             bottom: -100px;
         }
@@ -144,182 +96,227 @@
             100% { transform: translateY(-110vh) translateX(var(--drift)) scale(0.5); opacity: 0; }
         }
 
-        /* ========== INTRO EKRAN ========== */
-        .intro-screen {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(10, 10, 20, 0.95);
-            z-index: 10000;
-            display: flex; align-items: center; justify-content: center;
-            transition: opacity 0.8s, visibility 0.8s;
-        }
-
-        .intro-screen.hidden {
+        /* ========== NAVBAR ========== */
+        nav {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(15px);
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(88, 166, 255, 0.1);
             opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+            transition: opacity 0.5s;
         }
 
-        /* ========== OCH KO'K SATURN ========== */
-        .saturn-container {
+        nav.show { opacity: 1; }
+
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #58a6ff, #3fb950);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        nav ul { list-style: none; display: flex; gap: 35px; }
+        nav ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        nav ul li a:hover { color: #58a6ff; }
+
+        /* ========== ASOSIY CONTAINER - VERTICAL ========== */
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 60px;
+            gap: 50px;
+        }
+
+        /* ========== TEPADA - SATURN/AVATAR ========== */
+        .avatar-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             position: relative;
-            cursor: pointer;
-            transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 1s ease 0.3s;
+        }
+
+        .avatar-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .saturn-wrapper {
+            position: relative;
+            width: 320px;
+            height: 320px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .saturn-container.clicked {
-            transform: translate(-55vw, 0) scale(0.6);
+        /* Halqalar */
+        .ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(88, 166, 255, 0.3);
+            animation: rotateRing var(--duration) linear infinite;
         }
 
-        .saturn {
-            width: 180px; height: 180px;
-            background: radial-gradient(circle at 30% 30%, #7dd3fc, #38bdf8, #0ea5e9, #0284c7);
+        .ring:nth-child(1) {
+            width: 100%; height: 100%;
+            border-color: rgba(88, 166, 255, 0.2);
+            --duration: 20s;
+        }
+
+        .ring:nth-child(2) {
+            width: 90%; height: 90%;
+            border-color: rgba(63, 185, 80, 0.25);
+            --duration: 18s;
+            animation-direction: reverse;
+        }
+
+        .ring:nth-child(3) {
+            width: 80%; height: 80%;
+            border-color: rgba(139, 92, 246, 0.2);
+            --duration: 22s;
+        }
+
+        .ring:nth-child(4) {
+            width: 70%; height: 70%;
+            border-color: rgba(88, 166, 255, 0.15);
+            --duration: 25s;
+            animation-direction: reverse;
+        }
+
+        @keyframes rotateRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Glow effektlar */
+        .glow-circle {
+            position: absolute;
             border-radius: 50%;
+            background: radial-gradient(circle, rgba(88, 166, 255, 0.1) 0%, transparent 70%);
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        .glow-circle:nth-child(5) {
+            width: 110%; height: 110%;
+            animation-delay: 0s;
+        }
+
+        .glow-circle:nth-child(6) {
+            width: 95%; height: 95%;
+            animation-delay: 1s;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        /* Avatar */
+        .avatar-container {
             position: relative;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 10;
+            border: 3px solid rgba(88, 166, 255, 0.4);
             box-shadow: 
-                0 0 60px rgba(56, 189, 248, 0.6),
-                0 0 120px rgba(56, 189, 248, 0.3),
-                inset -20px -20px 40px rgba(2, 132, 199, 0.5);
-            animation: saturnFloat 4s ease-in-out infinite, saturnSpin 20s linear infinite;
+                0 0 60px rgba(88, 166, 255, 0.3),
+                inset 0 0 60px rgba(88, 166, 255, 0.1);
+            animation: floatAvatar 6s ease-in-out infinite;
         }
 
-        @keyframes saturnFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        @keyframes floatAvatar {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
         }
 
-        @keyframes saturnSpin {
-            0% { box-shadow: 0 0 60px rgba(56, 189, 248, 0.6), 0 0 120px rgba(56, 189, 248, 0.3), inset -20px -20px 40px rgba(2, 132, 199, 0.5); }
-            50% { box-shadow: 0 0 80px rgba(125, 211, 252, 0.8), 0 0 150px rgba(56, 189, 248, 0.4), inset -20px -20px 40px rgba(2, 132, 199, 0.5); }
-            100% { box-shadow: 0 0 60px rgba(56, 189, 248, 0.6), 0 0 120px rgba(56, 189, 248, 0.3), inset -20px -20px 40px rgba(2, 132, 199, 0.5); }
-        }
-
-        /* Saturn halqasi */
-        .saturn-ring {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%) rotateX(75deg);
-            width: 300px; height: 300px;
-            border: 15px solid rgba(125, 211, 252, 0.5);
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
-            animation: ringRotate 12s linear infinite;
-        }
-
-        .saturn-ring::before {
-            content: '';
-            position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
-            border: 8px solid rgba(56, 189, 248, 0.3);
-            border-radius: 50%;
-        }
-
-        @keyframes ringRotate {
-            0% { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(0deg); }
-            100% { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(360deg); }
-        }
-
-        .click-hint {
-            position: absolute; bottom: -80px; left: 50%;
-            transform: translateX(-50%);
-            color: #7dd3fc; font-size: 1rem; letter-spacing: 3px;
-            animation: hintPulse 2s ease-in-out infinite;
-            white-space: nowrap;
-            text-transform: uppercase;
-        }
-
-        @keyframes hintPulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
-        /* ========== AVATAR (TEPADA, FLOAT ANIMATSIYA) ========== */
-        .avatar-float {
-            position: fixed;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            opacity: 0;
-            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
-        }
-
-        .avatar-float.show {
-            opacity: 1;
-            animation: avatarFloat 4s ease-in-out infinite;
-        }
-
-        @keyframes avatarFloat {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-15px); }
-        }
-
-        .avatar-float img {
-            width: 90px; height: 90px;
-            border-radius: 50%;
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border: 3px solid rgba(88, 166, 255, 0.6);
-            box-shadow: 0 0 30px rgba(88, 166, 255, 0.5);
         }
 
-        /* ========== HERO CARD (O'NG TOMONDAN CHIQADI) ========== */
-        .hero-card {
-            position: fixed;
-            top: 50%;
-            right: -120%;
-            transform: translateY(-50%);
-            width: 480px;
-            max-width: 90vw;
-            background: linear-gradient(145deg, rgba(30, 45, 65, 0.9), rgba(20, 35, 55, 0.95));
+        /* ========== PASTDA - INFO CARD ========== */
+        .info-card {
+            max-width: 650px;
+            width: 100%;
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(88, 166, 255, 0.2);
+            border: 1px solid rgba(88, 166, 255, 0.15);
             border-radius: 24px;
-            padding: 45px 40px;
-            z-index: 100;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
-            transition: right 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s;
+            padding: 45px 50px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.6s;
         }
 
-        .hero-card.show {
-            right: 5%;
+        .info-card.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .hero-card .greeting {
+        .info-card .greeting {
             display: block;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 15px;
-            background: linear-gradient(90deg, #58a6ff, #3fb950);
+            background: linear-gradient(90deg, #3fb950, #58a6ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero-card h1 {
-            font-size: 3rem;
+        .info-card h1 {
+            font-size: 3.2rem;
             font-weight: 800;
             color: #f0f6fc;
             line-height: 1.1;
             margin-bottom: 15px;
+            letter-spacing: -1px;
         }
 
         .typing-wrapper {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             min-height: 35px;
         }
 
         .typing-text {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: #58a6ff;
-            font-weight: 500;
+            font-weight: 600;
             border-right: 3px solid #58a6ff;
-            padding-right: 5px;
+            padding-right: 8px;
             animation: blink 0.8s infinite;
         }
 
@@ -328,18 +325,19 @@
             50% { border-color: transparent; }
         }
 
-        .hero-card .description {
-            font-size: 1rem;
-            color: #b0b8c4;
-            line-height: 1.7;
-            margin-bottom: 30px;
+        .info-card .description {
+            font-size: 1.05rem;
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 35px;
         }
 
         .hero-buttons {
             display: flex;
             gap: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .btn {
@@ -347,7 +345,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 14px 28px;
+            padding: 14px 32px;
             border-radius: 12px;
             font-size: 1rem;
             font-weight: 600;
@@ -360,16 +358,17 @@
         .btn-primary {
             background: linear-gradient(135deg, #238636, #2ea043);
             color: #fff;
+            box-shadow: 0 4px 15px rgba(46, 160, 67, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(46, 160, 67, 0.4);
+            box-shadow: 0 8px 25px rgba(46, 160, 67, 0.4);
         }
 
         .btn-outline {
             background: transparent;
-            border: 2px solid rgba(88, 166, 255, 0.5);
+            border: 2px solid rgba(88, 166, 255, 0.4);
             color: #58a6ff;
         }
 
@@ -377,86 +376,50 @@
             background: rgba(88, 166, 255, 0.1);
             border-color: #58a6ff;
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(88, 166, 255, 0.2);
         }
 
         .social-links {
             display: flex;
             gap: 12px;
-            padding-top: 20px;
+            padding-top: 25px;
             border-top: 1px solid rgba(88, 166, 255, 0.15);
+            justify-content: center;
         }
 
         .social-links a {
-            width: 44px; height: 44px;
+            width: 45px; height: 45px;
             border-radius: 50%;
             background: rgba(88, 166, 255, 0.1);
-            border: 1px solid rgba(88, 166, 255, 0.3);
+            border: 1px solid rgba(88, 166, 255, 0.2);
             display: flex; align-items: center; justify-content: center;
             color: #58a6ff;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: all 0.3s;
         }
 
         .social-links a:hover {
             background: #58a6ff;
             color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(88, 166, 255, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(88, 166, 255, 0.4);
         }
 
         /* ========== ASOSIY SAYT ========== */
         .main-site {
             opacity: 0;
-            transition: opacity 1s 1.5s;
+            transition: opacity 1s;
             min-height: 100vh;
             padding: 120px 40px 40px;
         }
 
         .main-site.show { opacity: 1; }
 
-        /* ========== NAVBAR ========== */
-        nav {
-            background: rgba(26, 35, 50, 0.85);
-            backdrop-filter: blur(15px);
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(88, 166, 255, 0.2);
-            opacity: 0;
-            transition: opacity 0.5s 2s;
-        }
-
-        nav.show { opacity: 1; }
-
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #58a6ff;
-            text-decoration: none;
-        }
-
-        nav ul { list-style: none; display: flex; gap: 25px; }
-        nav ul li a {
-            color: #c9d1d9;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        nav ul li a:hover { color: #58a6ff; }
-
-        /* ========== QOLGAN SECTIONS ========== */
         section {
             padding: 80px 40px;
             max-width: 1000px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         section h2 {
@@ -484,17 +447,17 @@
 
         .about-text p {
             margin-bottom: 15px;
-            color: #b0b8c4;
+            color: #94a3b8;
         }
 
         .info-list { list-style: none; }
         .info-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(88, 166, 255, 0.15);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(88, 166, 255, 0.1);
             display: flex;
             justify-content: space-between;
         }
-        .info-list li span:first-child { color: #8b949e; }
+        .info-list li span:first-child { color: #64748b; }
         .info-list li span:last-child { color: #f0f6fc; font-weight: 500; }
 
         .skills-grid, .projects-grid, .contact-grid {
@@ -506,58 +469,43 @@
         .contact-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 
         .skill-card, .project-card, .contact-card {
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(30, 41, 59, 0.5);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(88, 166, 255, 0.2);
+            border: 1px solid rgba(88, 166, 255, 0.15);
             border-radius: 16px;
-            padding: 25px;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-card::before, .project-card::before, .contact-card::before {
-            content: '';
-            position: absolute;
-            top: -50%; right: -50%;
-            width: 150px; height: 150px;
-            background: radial-gradient(circle, rgba(88, 166, 255, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
+            padding: 30px;
             transition: all 0.4s;
         }
 
         .skill-card:hover, .project-card:hover, .contact-card:hover {
             transform: translateY(-8px);
-            border-color: #58a6ff;
-            box-shadow: 0 15px 40px rgba(88, 166, 255, 0.25);
+            border-color: rgba(88, 166, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(88, 166, 255, 0.15);
         }
-
-        .skill-card:hover::before { transform: scale(1.5); }
 
         .skill-card .icon, .contact-card .icon {
             font-size: 2.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: block;
         }
 
         .skill-card h3, .project-card h3, .contact-card h3 {
             color: #f0f6fc;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .project-card h3 { color: #58a6ff; }
 
         .skill-card p, .project-card p {
-            color: #b0b8c4;
-            font-size: 0.9rem;
+            color: #94a3b8;
+            font-size: 0.95rem;
             margin-bottom: 15px;
         }
 
         .skill-bar {
             width: 100%; height: 6px;
-            background: #21262d;
+            background: rgba(30, 41, 59, 0.8);
             border-radius: 3px;
-            margin-top: 12px;
             overflow: hidden;
         }
 
@@ -572,11 +520,12 @@
         }
 
         .project-card .tags span {
-            background: rgba(88, 166, 255, 0.15);
+            background: rgba(88, 166, 255, 0.1);
             color: #58a6ff;
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 20px;
             font-size: 0.8rem;
+            border: 1px solid rgba(88, 166, 255, 0.2);
         }
 
         .contact-card a {
@@ -586,21 +535,21 @@
 
         footer {
             text-align: center;
-            padding: 30px;
-            border-top: 1px solid rgba(88, 166, 255, 0.2);
-            color: #8b949e;
+            padding: 40px;
+            border-top: 1px solid rgba(88, 166, 255, 0.1);
+            color: #64748b;
             font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
-            .hero-card { width: 95%; padding: 30px 25px; }
-            .hero-card h1 { font-size: 2rem; }
-            .hero-card.show { right: 2.5%; }
-            .saturn-container.clicked { transform: translate(-30vw, 20vh) scale(0.4); }
-            .saturn { width: 120px; height: 120px; }
-            .saturn-ring { width: 200px; height: 200px; }
             nav { padding: 15px 20px; }
-            nav ul { gap: 15px; font-size: 0.9rem; }
+            nav ul { gap: 20px; font-size: 0.85rem; }
+            .main-container { padding: 100px 20px 40px; gap: 40px; }
+            .saturn-wrapper { width: 260px; height: 260px; }
+            .avatar-container { width: 220px; height: 220px; }
+            .info-card { padding: 35px 30px; }
+            .info-card h1 { font-size: 2.2rem; }
+            .info-card .description { font-size: 0.95rem; }
             .about-grid { grid-template-columns: 1fr; }
             section { padding: 60px 20px; }
             .cursor, .cursor-dot, .cursor-glow { display: none; }
@@ -617,48 +566,10 @@
 
     <!-- Orqa fon -->
     <div class="bg-gradient"></div>
-    <div class="bg-aurora"><div class="aurora"></div></div>
     <div class="bg-stars" id="stars"></div>
     <div class="bg-particles" id="particles"></div>
 
-    <!-- INTRO EKRAN -->
-    <div class="intro-screen" id="introScreen">
-        <div class="saturn-container" id="saturn">
-            <div class="saturn"></div>
-            <div class="saturn-ring"></div>
-            <div class="click-hint">Boshlash uchun bosing</div>
-        </div>
-    </div>
-
-    <!-- AVATAR (TEPADA) -->
-    <div class="avatar-float" id="avatarFloat">
-        <img src="110569765547bdeaa46403ad7bc51169.jpg" alt="Arslon">
-    </div>
-
-    <!-- HERO CARD (O'NG TOMONDAN) -->
-    <div class="hero-card" id="heroCard">
-        <span class="greeting">Salom, men</span>
-        <h1>Arslon<br>Sadullayev</h1>
-        <div class="typing-wrapper">
-            <span class="typing-text" id="typing"></span>
-        </div>
-        <p class="description">
-            Zamonaviy va chiroyli veb-saytlar yaratishga qiziqaman. 
-            Toza kod yozish va foydalanuvchilarga qulay interfeyslar 
-            yaratish — mening asosiy maqsadim.
-        </p>
-        <div class="hero-buttons">
-            <a href="#contact" class="btn btn-primary">Bog'lanish</a>
-            <a href="#projects" class="btn btn-outline">Loyihalarim</a>
-        </div>
-        <div class="social-links">
-            <a href="https://github.com/Arslon-Sadullayev" target="_blank" title="GitHub"></a>
-            <a href="https://t.me/username" target="_blank" title="Telegram">💬</a>
-            <a href="mailto:example@mail.com" title="Email"></a>
-        </div>
-    </div>
-
-    <!-- NAVBAR -->
+    <!-- Navbar -->
     <nav id="navbar">
         <a href="#" class="logo">AS</a>
         <ul>
@@ -668,6 +579,54 @@
             <li><a href="#contact">Aloqa</a></li>
         </ul>
     </nav>
+
+    <!-- ASOSIY CONTAINER - VERTICAL -->
+    <div class="main-container">
+        
+        <!-- TEPADA: SATURN/AVATAR -->
+        <div class="avatar-section" id="avatarSection">
+            <div class="saturn-wrapper">
+                <!-- Aylanib turuvchi halqalar -->
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                
+                <!-- Glow effektlar -->
+                <div class="glow-circle"></div>
+                <div class="glow-circle"></div>
+                
+                <!-- Avatar -->
+                <div class="avatar-container">
+                    <img src="110569765547bdeaa46403ad7bc51169.jpg" alt="Arslon Sadullayev">
+                </div>
+            </div>
+        </div>
+
+        <!-- PASTDA: INFO CARD -->
+        <div class="info-card" id="infoCard">
+            <span class="greeting">Salom, men</span>
+            <h1>Arslon Sadullayev</h1>
+            <div class="typing-wrapper">
+                <span class="typing-text" id="typing"></span>
+            </div>
+            <p class="description">
+                Zamonaviy va chiroyli veb-saytlar yaratishga qiziqaman. 
+                Toza kod yozish va foydalanuvchilarga qulay interfeyslar 
+                yaratish — mening asosiy maqsadim.
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Bog'lanish</a>
+                <a href="#projects" class="btn btn-outline">Loyihalarim</a>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/Arslon-Sadullayev" target="_blank" title="GitHub"></a>
+                <a href="https://t.me/username" target="_blank" title="Telegram">💬</a>
+                <a href="mailto:example@mail.com" title="Email"></a>
+            </div>
+        </div>
+
+    </div>
 
     <!-- ASOSIY SAYT -->
     <div class="main-site" id="mainSite">
@@ -683,7 +642,7 @@
                     <li><span>Ism</span><span>Arslon Sadullayev</span></li>
                     <li><span>Joylashuv</span><span>O'zbekiston</span></li>
                     <li><span>Til</span><span>O'zbek, Rus, Ingliz</span></li>
-                    <li><span>Holat</span><span>Ishga tayyor</span></li>
+                    <li><span>Holat</span><span style="color: #3fb950;">Ishga tayyor</span></li>
                 </ul>
             </div>
         </section>
@@ -693,7 +652,7 @@
             <h2>Ko'nikmalar</h2>
             <div class="skills-grid">
                 <div class="skill-card">
-                    <span class="icon">🌐</span>
+                    <span class="icon"></span>
                     <h3>HTML5</h3>
                     <p>Semantik va toza kod</p>
                     <div class="skill-bar"><div class="fill" style="width: 90%"></div></div>
@@ -711,7 +670,7 @@
                     <div class="skill-bar"><div class="fill" style="width: 70%"></div></div>
                 </div>
                 <div class="skill-card">
-                    <span class="icon">🔧</span>
+                    <span class="icon"></span>
                     <h3>Git & GitHub</h3>
                     <p>Versiya nazorati</p>
                     <div class="skill-bar"><div class="fill" style="width: 75%"></div></div>
@@ -729,7 +688,7 @@
                     <div class="tags"><span>HTML</span><span>CSS</span><span>GitHub Pages</span></div>
                 </div>
                 <div class="project-card">
-                    <h3> Loyiha 2</h3>
+                    <h3>📌 Loyiha 2</h3>
                     <p>Bu yerda keyingi loyihangiz haqida ma'lumot yozing.</p>
                     <div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
                 </div>
@@ -771,7 +730,7 @@
     <script>
         // ========== YULDUZLAR ==========
         const starsBg = document.getElementById('stars');
-        for (let i = 0; i < 150; i++) {
+        for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             const size = Math.random() * 2 + 0.5;
@@ -786,17 +745,17 @@
 
         // ========== ZARRACHALAR ==========
         const particlesContainer = document.getElementById('particles');
-        const colors = ['rgba(88, 166, 255, 0.5)', 'rgba(63, 185, 80, 0.4)', 'rgba(139, 92, 246, 0.4)'];
-        for (let i = 0; i < 25; i++) {
+        const colors = ['rgba(88, 166, 255, 0.3)', 'rgba(63, 185, 80, 0.2)', 'rgba(139, 92, 246, 0.2)'];
+        for (let i = 0; i < 30; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
-            const size = Math.random() * 8 + 3;
+            const size = Math.random() * 6 + 2;
             particle.style.width = size + 'px';
             particle.style.height = size + 'px';
             particle.style.left = Math.random() * 100 + '%';
             particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.setProperty('--duration', (Math.random() * 15 + 10) + 's');
-            particle.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
+            particle.style.setProperty('--duration', (Math.random() * 20 + 15) + 's');
+            particle.style.setProperty('--drift', (Math.random() * 150 - 75) + 'px');
             particle.style.animationDelay = Math.random() * 10 + 's';
             particlesContainer.appendChild(particle);
         }
@@ -811,7 +770,6 @@
             mouseX = e.clientX; mouseY = e.clientY;
             cursorDot.style.left = mouseX - 4 + 'px';
             cursorDot.style.top = mouseY - 4 + 'px';
-            createTrail(mouseX, mouseY);
         });
 
         function animateCursor() {
@@ -827,19 +785,6 @@
         }
         animateCursor();
 
-        let trailCount = 0;
-        function createTrail(x, y) {
-            trailCount++;
-            if (trailCount % 3 === 0) {
-                const trail = document.createElement('div');
-                trail.className = 'cursor-trail';
-                trail.style.left = x - 5 + 'px';
-                trail.style.top = y - 5 + 'px';
-                document.body.appendChild(trail);
-                setTimeout(() => trail.remove(), 1000);
-            }
-        }
-
         document.querySelectorAll('a, .btn, .skill-card, .project-card, .contact-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.style.transform = 'scale(1.8)';
@@ -851,51 +796,31 @@
             });
         });
 
-        // ========== SATURN BOSILGANDA ==========
-        const saturn = document.getElementById('saturn');
-        const introScreen = document.getElementById('introScreen');
-        const avatarFloat = document.getElementById('avatarFloat');
-        const heroCard = document.getElementById('heroCard');
-        const navbar = document.getElementById('navbar');
-        const mainSite = document.getElementById('mainSite');
-
-        let clicked = false;
-
-        saturn.addEventListener('click', () => {
-            if (clicked) return;
-            clicked = true;
-
-            // 1. Saturn chapga suriladi
-            saturn.classList.add('clicked');
-
-            // 2. Intro yo'qoladi
+        // ========== SAHIFA YUKLANGANDA ANIMATSIYA ==========
+        window.addEventListener('load', () => {
+            // Navbar ko'rinadi
             setTimeout(() => {
-                introScreen.classList.add('hidden');
+                document.getElementById('navbar').classList.add('show');
             }, 300);
 
-            // 3. Avatar tepada paydo bo'ladi (float animatsiya bilan)
+            // Avatar section (Saturn) ko'rinadi
             setTimeout(() => {
-                avatarFloat.classList.add('show');
-            }, 400);
+                document.getElementById('avatarSection').classList.add('show');
+            }, 500);
 
-            // 4. Hero card o'ngdan chiqadi
+            // Info card ko'rinadi
             setTimeout(() => {
-                heroCard.classList.add('show');
-            }, 600);
+                document.getElementById('infoCard').classList.add('show');
+            }, 800);
 
-            // 5. Navbar ko'rinadi
+            // Asosiy sayt
             setTimeout(() => {
-                navbar.classList.add('show');
-            }, 1000);
-
-            // 6. Asosiy sayt
-            setTimeout(() => {
-                mainSite.classList.add('show');
+                document.getElementById('mainSite').classList.add('show');
             }, 1200);
         });
 
         // ========== TYPING EFFECT ==========
-        const typingTexts = ['UI/UX Designer', 'Web Developer', 'Frontend Developer', 'Freelancer'];
+        const typingTexts = ['Frontend', 'Web Developer', 'UI/UX Designer', 'Freelancer'];
         let textIndex = 0, charIndex = 0, isDeleting = false;
         const typingElement = document.getElementById('typing');
 
