@@ -10,6 +10,7 @@
             padding: 0;
             box-sizing: border-box;
             cursor: none;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -22,8 +23,7 @@
 
         /* ========== CURSOR ========== */
         .cursor {
-            width: 24px;
-            height: 24px;
+            width: 24px; height: 24px;
             border: 2px solid #58a6ff;
             border-radius: 50%;
             position: fixed;
@@ -34,8 +34,7 @@
         }
 
         .cursor-dot {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background: #58a6ff;
             border-radius: 50%;
             position: fixed;
@@ -46,8 +45,7 @@
 
         .cursor-glow {
             position: fixed;
-            width: 200px;
-            height: 200px;
+            width: 200px; height: 200px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(88, 166, 255, 0.25) 0%, transparent 70%);
             pointer-events: none;
@@ -57,8 +55,7 @@
 
         .cursor-trail {
             position: fixed;
-            width: 10px;
-            height: 10px;
+            width: 10px; height: 10px;
             border-radius: 50%;
             background: rgba(88, 166, 255, 0.6);
             pointer-events: none;
@@ -73,8 +70,7 @@
 
         /* ========== ORQA FON ========== */
         .bg-gradient {
-            position: fixed;
-            top: 0; left: 0;
+            position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
             background: linear-gradient(-45deg, #1a2332, #2a3a52, #1f3a5f, #253d5c, #1a2332);
             background-size: 400% 400%;
@@ -88,11 +84,9 @@
         }
 
         .bg-aurora {
-            position: fixed;
-            top: 0; left: 0;
+            position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: -3;
-            opacity: 0.4;
+            z-index: -3; opacity: 0.4;
         }
 
         .aurora {
@@ -128,11 +122,9 @@
         }
 
         .bg-particles {
-            position: fixed;
-            top: 0; left: 0;
+            position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
+            z-index: -1; overflow: hidden;
         }
 
         .particle {
@@ -149,148 +141,180 @@
             100% { transform: translateY(-110vh) translateX(var(--drift)) scale(0.5); opacity: 0; }
         }
 
-        .shooting-star {
-            position: absolute;
-            width: 2px; height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: shoot 3s linear infinite;
-            opacity: 0;
-        }
-
-        .shooting-star::after {
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            width: 80px; height: 1px;
-            background: linear-gradient(to left, white, transparent);
-        }
-
-        @keyframes shoot {
-            0% { transform: translate(0, 0) rotate(-45deg); opacity: 0; }
-            5% { opacity: 1; }
-            15% { transform: translate(-400px, 400px) rotate(-45deg); opacity: 0; }
-            100% { opacity: 0; }
-        }
-
-        /* ========== NAVBAR ========== */
-        nav {
-            background: rgba(26, 35, 50, 0.85);
-            backdrop-filter: blur(15px);
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* ========== INTRO EKRAN ========== */
+        .intro-screen {
             position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(88, 166, 255, 0.2);
-        }
-
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #58a6ff;
-            text-decoration: none;
-        }
-
-        nav ul { list-style: none; display: flex; gap: 25px; }
-        nav ul li a {
-            color: #c9d1d9;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        nav ul li a:hover { color: #58a6ff; }
-
-        /* ========== YANGI HERO - SPLIT LAYOUT ========== */
-        .hero {
-            min-height: 100vh;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            z-index: 10000;
             display: flex;
             align-items: center;
-            padding: 100px 40px 60px;
-            position: relative;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            width: 100%;
-        }
-
-        /* Chap tomon - Rasm */
-        .hero-image {
-            display: flex;
             justify-content: center;
-            align-items: center;
+            transition: opacity 0.8s, visibility 0.8s;
+        }
+
+        .intro-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* SATURN - MARKAZDA */
+        .saturn-wrapper {
             position: relative;
+            cursor: pointer;
+            transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 100;
+        }
+
+        .saturn-wrapper.slide-left {
+            transform: translateX(-55vw) translateY(10vh);
+        }
+
+        .saturn {
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle at 30% 30%, #64ffda, #00bcd4, #008ba3);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 
+                0 0 50px rgba(100, 255, 218, 0.6),
+                0 0 100px rgba(0, 188, 212, 0.4),
+                inset -20px -20px 40px rgba(0,0,0,0.3);
+            animation: saturnFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes saturnFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .saturn-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotateX(75deg);
+            width: 240px;
+            height: 240px;
+            border: 15px solid rgba(100, 255, 218, 0.5);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 30px rgba(100, 255, 218, 0.4),
+                inset 0 0 20px rgba(100, 255, 218, 0.2);
+            animation: ringRotate 10s linear infinite;
+        }
+
+        @keyframes ringRotate {
+            0% { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(0deg); }
+            100% { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(360deg); }
+        }
+
+        .click-hint {
+            position: absolute;
+            bottom: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #64ffda;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            animation: hintPulse 2s ease-in-out infinite;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* AVATAR - SATURN TAGIDA */
+        .avatar-container {
+            position: fixed;
+            top: 55%;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s;
+            z-index: 100;
+            text-align: center;
+        }
+
+        .avatar-container.show {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
         }
 
         .avatar-wrapper {
             position: relative;
-            animation: float 6s ease-in-out infinite;
+            animation: avatarFloat 5s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        @keyframes avatarFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
-        .avatar-ring {
+        .avatar-ring-anim {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 280px;
-            height: 280px;
+            width: 200px; height: 200px;
             border-radius: 50%;
             border: 2px solid rgba(88, 166, 255, 0.3);
-            animation: ringPulse 3s ease-in-out infinite;
+            animation: avatarRingPulse 3s ease-in-out infinite;
         }
 
-        .avatar-ring:nth-child(2) {
-            width: 320px;
-            height: 320px;
+        .avatar-ring-anim:nth-child(2) {
+            width: 230px; height: 230px;
             border-color: rgba(63, 185, 80, 0.2);
             animation-delay: 0.5s;
         }
 
-        .avatar-ring:nth-child(3) {
-            width: 360px;
-            height: 360px;
+        .avatar-ring-anim:nth-child(3) {
+            width: 260px; height: 260px;
             border-color: rgba(139, 92, 246, 0.15);
             animation-delay: 1s;
         }
 
-        @keyframes ringPulse {
+        @keyframes avatarRingPulse {
             0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
             50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.5; }
         }
 
         .avatar {
-            width: 240px;
-            height: 240px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid rgba(88, 166, 255, 0.6);
-            box-shadow: 0 0 50px rgba(88, 166, 255, 0.5);
+            box-shadow: 0 0 40px rgba(88, 166, 255, 0.5);
             position: relative;
             z-index: 2;
         }
 
-        /* O'ng tomon - Matn (Glassmorphism) */
-        .hero-text {
-            background: rgba(30, 41, 59, 0.5);
+        /* O'NG TOMONDAN CHIQADIGAN ELEMENTLAR */
+        .info-panel {
+            position: fixed;
+            top: 50%;
+            right: -100%;
+            transform: translateY(-50%);
+            z-index: 100;
+            max-width: 500px;
+            transition: right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+        }
+
+        .info-panel.show {
+            right: 8%;
+        }
+
+        .info-content {
+            background: rgba(30, 41, 59, 0.8);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(88, 166, 255, 0.2);
+            border: 1px solid rgba(88, 166, 255, 0.3);
             border-radius: 24px;
-            padding: 50px 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideInRight 1s ease;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: slideInRight 1s ease 0.8s backwards;
         }
 
         @keyframes slideInRight {
@@ -298,52 +322,52 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        .hero-text .greeting {
+        .greeting {
             display: inline-block;
-            background: linear-gradient(90deg, #58a6ff, #3fb950);
+            background: linear-gradient(90deg, #64ffda, #58a6ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
 
-        .hero-text h1 {
-            font-size: 3.2rem;
+        .name h1 {
+            font-size: 3.5rem;
             color: #f0f6fc;
-            margin-bottom: 10px;
-            line-height: 1.2;
+            margin-bottom: 5px;
+            line-height: 1.1;
         }
 
         .typing-wrapper {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin: 15px 0 25px;
             min-height: 35px;
         }
 
         .typing-text {
             font-size: 1.4rem;
-            color: #58a6ff;
+            color: #64ffda;
             font-weight: 500;
-            border-right: 3px solid #58a6ff;
+            border-right: 3px solid #64ffda;
             padding-right: 5px;
             animation: blink 0.8s infinite;
         }
 
         @keyframes blink {
-            0%, 100% { border-color: #58a6ff; }
+            0%, 100% { border-color: #64ffda; }
             50% { border-color: transparent; }
         }
 
-        .hero-text .description {
+        .description {
             font-size: 1.05rem;
             color: #b0b8c4;
             margin-bottom: 30px;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         .hero-buttons {
@@ -384,18 +408,17 @@
             box-shadow: 0 10px 30px rgba(88, 166, 255, 0.3);
         }
 
-        /* Social icons */
         .social-links {
             display: flex;
             gap: 15px;
-            margin-top: 25px;
+            margin-top: 30px;
             padding-top: 25px;
             border-top: 1px solid rgba(88, 166, 255, 0.15);
         }
 
         .social-links a {
-            width: 42px;
-            height: 42px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background: rgba(88, 166, 255, 0.1);
             border: 1px solid rgba(88, 166, 255, 0.3);
@@ -404,7 +427,7 @@
             justify-content: center;
             color: #58a6ff;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: all 0.3s;
         }
 
@@ -415,9 +438,50 @@
             box-shadow: 0 5px 15px rgba(88, 166, 255, 0.4);
         }
 
-        /* ========== QOLGAN SECTIONS ========== */
+        /* ASOSIY SAYT */
+        .main-site {
+            opacity: 0;
+            transition: opacity 1s 1s;
+            min-height: 100vh;
+        }
+
+        .main-site.show {
+            opacity: 1;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: rgba(26, 35, 50, 0.85);
+            backdrop-filter: blur(15px);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(88, 166, 255, 0.2);
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        nav ul { list-style: none; display: flex; gap: 25px; }
+        nav ul li a {
+            color: #c9d1d9;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover { color: #58a6ff; }
+
+        /* QOLGAN SECTIONS */
         section {
-            padding: 80px 40px;
+            padding: 100px 40px 60px;
             max-width: 1000px;
             margin: 0 auto;
             position: relative;
@@ -562,63 +626,67 @@
         }
 
         @media (max-width: 768px) {
-            .hero-container { grid-template-columns: 1fr; gap: 40px; }
-            .hero { padding: 100px 20px 60px; }
-            .hero-text { padding: 30px 25px; }
-            .hero-text h1 { font-size: 2.2rem; }
-            .avatar { width: 180px; height: 180px; }
-            .avatar-ring { width: 220px; height: 220px; }
-            .avatar-ring:nth-child(2) { width: 250px; height: 250px; }
-            .avatar-ring:nth-child(3) { width: 280px; height: 280px; }
+            .saturn-wrapper.slide-left {
+                transform: translateX(-30vw) translateY(15vh) scale(0.7);
+            }
+            .saturn { width: 100px; height: 100px; }
+            .saturn-ring { width: 170px; height: 170px; }
+            .avatar { width: 130px; height: 130px; }
+            .avatar-ring-anim { width: 150px; height: 150px; }
+            .avatar-ring-anim:nth-child(2) { width: 170px; height: 170px; }
+            .avatar-ring-anim:nth-child(3) { width: 190px; height: 190px; }
+            .info-panel.show { right: 5%; }
+            .info-content { padding: 25px; }
+            .name h1 { font-size: 2.2rem; }
+            .cursor, .cursor-dot, .cursor-glow { display: none; }
+            * { cursor: auto; }
             nav { padding: 15px 20px; }
             nav ul { gap: 15px; font-size: 0.9rem; }
             .about-grid { grid-template-columns: 1fr; }
-            section { padding: 60px 20px; }
-            .cursor, .cursor-dot, .cursor-glow { display: none; }
-            * { cursor: auto; }
+            section { padding: 80px 20px 40px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Cursor -->
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
     <div class="cursor-glow"></div>
 
+    <!-- Orqa fon -->
     <div class="bg-gradient"></div>
     <div class="bg-aurora"><div class="aurora"></div></div>
     <div class="bg-stars" id="stars"></div>
     <div class="bg-particles" id="particles"></div>
 
-    <!-- Navbar -->
-    <nav>
-        <a href="#" class="logo">AS</a>
-        <ul>
-            <li><a href="#about">Men haqimda</a></li>
-            <li><a href="#skills">Ko'nikmalar</a></li>
-            <li><a href="#projects">Loyihalar</a></li>
-            <li><a href="#contact">Aloqa</a></li>
-        </ul>
-    </nav>
+    <!-- INTRO EKRAN -->
+    <div class="intro-screen" id="introScreen">
+        
+        <!-- SATURN - MARKAZDA -->
+        <div class="saturn-wrapper" id="saturn">
+            <div class="saturn"></div>
+            <div class="saturn-ring"></div>
+            <div class="click-hint">Boshlash uchun bosing</div>
+        </div>
 
-    <!-- ========== YANGI HERO ========== -->
-    <section class="hero">
-        <div class="hero-container">
-            
-            <!-- Chap: Rasm -->
-            <div class="hero-image">
-                <div class="avatar-wrapper">
-                    <div class="avatar-ring"></div>
-                    <div class="avatar-ring"></div>
-                    <div class="avatar-ring"></div>
-                    <img src="110569765547bdeaa46403ad7bc51169.jpg" alt="Arslon" class="avatar">
-                </div>
+        <!-- AVATAR - SATURN TAGIDA -->
+        <div class="avatar-container" id="avatarContainer">
+            <div class="avatar-wrapper">
+                <div class="avatar-ring-anim"></div>
+                <div class="avatar-ring-anim"></div>
+                <div class="avatar-ring-anim"></div>
+                <img src="110569765547bdeaa46403ad7bc51169.jpg" alt="Arslon" class="avatar">
             </div>
+        </div>
 
-            <!-- O'ng: Matn -->
-            <div class="hero-text">
-                <span class="greeting"> Salom, men</span>
-                <h1>Arslon Sadullayev</h1>
+        <!-- O'NG TOMONDA MA'LUMOTLAR -->
+        <div class="info-panel" id="infoPanel">
+            <div class="info-content">
+                <span class="greeting">Salom, men</span>
+                <div class="name">
+                    <h1>Arslon Sadullayev</h1>
+                </div>
                 <div class="typing-wrapper">
                     <span class="typing-text" id="typing"></span>
                 </div>
@@ -628,8 +696,8 @@
                     yaratish — mening asosiy maqsadim.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn"> Bog'lanish</a>
-                    <a href="#projects" class="btn btn-outline"> Loyihalarim</a>
+                    <a href="#contact" class="btn">Bog'lanish</a>
+                    <a href="#projects" class="btn btn-outline">Loyihalarim</a>
                 </div>
                 <div class="social-links">
                     <a href="https://github.com/Arslon-Sadullayev" target="_blank" title="GitHub">🐙</a>
@@ -637,107 +705,154 @@
                     <a href="mailto:example@mail.com" title="Email">📧</a>
                 </div>
             </div>
-
         </div>
-    </section>
 
-    <!-- About -->
-    <section id="about">
-        <h2>Men haqimda</h2>
-        <div class="about-grid">
-            <div class="about-text">
-                <p>Salom! Men Arslon Sadullayev. Web dasturlash sohasida faoliyat yuritaman. HTML, CSS va JavaScript texnologiyalari bilan ishlayman.</p>
-                <p>Maqsadim — foydalanuvchilarga qulay va chiroyli veb-ilovalar yaratish.</p>
-            </div>
-            <ul class="info-list">
-                <li><span>Ism</span><span>Arslon Sadullayev</span></li>
-                <li><span>Joylashuv</span><span>O'zbekiston</span></li>
-                <li><span>Til</span><span>O'zbek, Rus, Ingliz</span></li>
-                <li><span>Holat</span><span>Ishga tayyor</span></li>
+    </div>
+
+    <!-- ASOSIY SAYT -->
+    <div class="main-site" id="mainSite">
+        
+        <!-- Navbar -->
+        <nav>
+            <a href="#" class="logo">AS</a>
+            <ul>
+                <li><a href="#about">Men haqimda</a></li>
+                <li><a href="#skills">Ko'nikmalar</a></li>
+                <li><a href="#projects">Loyihalar</a></li>
+                <li><a href="#contact">Aloqa</a></li>
             </ul>
-        </div>
-    </section>
+        </nav>
 
-    <!-- Skills -->
-    <section id="skills">
-        <h2>Ko'nikmalar</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <span class="icon">🌐</span>
-                <h3>HTML5</h3>
-                <p>Semantik va toza kod</p>
-                <div class="skill-bar"><div class="fill" style="width: 90%"></div></div>
+        <!-- About -->
+        <section id="about">
+            <h2>Men haqimda</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Salom! Men Arslon Sadullayev. Web dasturlash sohasida faoliyat yuritaman. HTML, CSS va JavaScript texnologiyalari bilan ishlayman.</p>
+                    <p>Maqsadim — foydalanuvchilarga qulay va chiroyli veb-ilovalar yaratish.</p>
+                </div>
+                <ul class="info-list">
+                    <li><span>Ism</span><span>Arslon Sadullayev</span></li>
+                    <li><span>Joylashuv</span><span>O'zbekiston</span></li>
+                    <li><span>Til</span><span>O'zbek, Rus, Ingliz</span></li>
+                    <li><span>Holat</span><span>Ishga tayyor</span></li>
+                </ul>
             </div>
-            <div class="skill-card">
-                <span class="icon"></span>
-                <h3>CSS3</h3>
-                <p>Responsive dizayn</p>
-                <div class="skill-bar"><div class="fill" style="width: 80%"></div></div>
-            </div>
-            <div class="skill-card">
-                <span class="icon"></span>
-                <h3>JavaScript</h3>
-                <p>Interaktiv ilovalar</p>
-                <div class="skill-bar"><div class="fill" style="width: 70%"></div></div>
-            </div>
-            <div class="skill-card">
-                <span class="icon"></span>
-                <h3>Git & GitHub</h3>
-                <p>Versiya nazorati</p>
-                <div class="skill-bar"><div class="fill" style="width: 75%"></div></div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Projects -->
-    <section id="projects">
-        <h2>Loyihalar</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3>Portfolio Sayt</h3>
-                <p>Shaxsiy portfolio veb-sayti. GitHub Pages orqali deploy qilingan.</p>
-                <div class="tags"><span>HTML</span><span>CSS</span><span>GitHub Pages</span></div>
+        <!-- Skills -->
+        <section id="skills">
+            <h2>Ko'nikmalar</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <span class="icon">🌐</span>
+                    <h3>HTML5</h3>
+                    <p>Semantik va toza kod</p>
+                    <div class="skill-bar"><div class="fill" style="width: 90%"></div></div>
+                </div>
+                <div class="skill-card">
+                    <span class="icon"></span>
+                    <h3>CSS3</h3>
+                    <p>Responsive dizayn</p>
+                    <div class="skill-bar"><div class="fill" style="width: 80%"></div></div>
+                </div>
+                <div class="skill-card">
+                    <span class="icon">⚡</span>
+                    <h3>JavaScript</h3>
+                    <p>Interaktiv ilovalar</p>
+                    <div class="skill-bar"><div class="fill" style="width: 70%"></div></div>
+                </div>
+                <div class="skill-card">
+                    <span class="icon">🔧</span>
+                    <h3>Git & GitHub</h3>
+                    <p>Versiya nazorati</p>
+                    <div class="skill-bar"><div class="fill" style="width: 75%"></div></div>
+                </div>
             </div>
-            <div class="project-card">
-                <h3>📌 Loyiha 2</h3>
-                <p>Bu yerda keyingi loyihangiz haqida ma'lumot yozing.</p>
-                <div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
-            </div>
-            <div class="project-card">
-                <h3>📌 Loyiha 3</h3>
-                <p>Kelajakdagi loyihalaringizni shu yerga qo'shing.</p>
-                <div class="tags"><span>React</span><span>Node.js</span></div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact -->
-    <section id="contact">
-        <h2>Aloqa</h2>
-        <div class="contact-grid">
-            <div class="contact-card">
-                <span class="icon">📧</span>
-                <h3>Email</h3>
-                <a href="mailto:example@mail.com">example@mail.com</a>
+        <!-- Projects -->
+        <section id="projects">
+            <h2>Loyihalar</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Portfolio Sayt</h3>
+                    <p>Shaxsiy portfolio veb-sayti. GitHub Pages orqali deploy qilingan.</p>
+                    <div class="tags"><span>HTML</span><span>CSS</span><span>GitHub Pages</span></div>
+                </div>
+                <div class="project-card">
+                    <h3>📌 Loyiha 2</h3>
+                    <p>Bu yerda keyingi loyihangiz haqida ma'lumot yozing.</p>
+                    <div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+                </div>
+                <div class="project-card">
+                    <h3>📌 Loyiha 3</h3>
+                    <p>Kelajakdagi loyihalaringizni shu yerga qo'shing.</p>
+                    <div class="tags"><span>React</span><span>Node.js</span></div>
+                </div>
             </div>
-            <div class="contact-card">
-                <span class="icon">💬</span>
-                <h3>Telegram</h3>
-                <a href="https://t.me/username" target="_blank">@username</a>
-            </div>
-            <div class="contact-card">
-                <span class="icon">🐙</span>
-                <h3>GitHub</h3>
-                <a href="https://github.com/Arslon-Sadullayev" target="_blank">Arslon-Sadullayev</a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <p>© 2026 Arslon Sadullayev. Barcha huquqlar himoyalangan.</p>
-    </footer>
+        <!-- Contact -->
+        <section id="contact">
+            <h2>Aloqa</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <span class="icon"></span>
+                    <h3>Email</h3>
+                    <a href="mailto:example@mail.com">example@mail.com</a>
+                </div>
+                <div class="contact-card">
+                    <span class="icon">💬</span>
+                    <h3>Telegram</h3>
+                    <a href="https://t.me/username" target="_blank">@username</a>
+                </div>
+                <div class="contact-card">
+                    <span class="icon">🐙</span>
+                    <h3>GitHub</h3>
+                    <a href="https://github.com/Arslon-Sadullayev" target="_blank">Arslon-Sadullayev</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Arslon Sadullayev. Barcha huquqlar himoyalangan.</p>
+        </footer>
+
+    </div>
 
     <script>
+        // ========== YULDUZLAR VA ZARRACHALAR ==========
+        const starsBg = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2 + 0.5;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starsBg.appendChild(star);
+        }
+
+        const particlesContainer = document.getElementById('particles');
+        const colors = ['rgba(88, 166, 255, 0.5)', 'rgba(63, 185, 80, 0.4)', 'rgba(139, 92, 246, 0.4)'];
+        for (let i = 0; i < 25; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 8 + 3;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.setProperty('--duration', (Math.random() * 15 + 10) + 's');
+            particle.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
         // ========== CURSOR ==========
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
@@ -820,55 +935,51 @@
         }
         typeEffect();
 
-        // ========== YULDUZLAR ==========
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 150; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            const size = Math.random() * 2 + 0.5;
-            star.style.width = size + 'px';
-            star.style.height = size + 'px';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-            star.style.animationDelay = Math.random() * 5 + 's';
-            starsContainer.appendChild(star);
-        }
+        // ========== SATURN BOSILGANDA ==========
+        const saturn = document.getElementById('saturn');
+        const introScreen = document.getElementById('introScreen');
+        const avatarContainer = document.getElementById('avatarContainer');
+        const infoPanel = document.getElementById('infoPanel');
+        const mainSite = document.getElementById('mainSite');
 
-        function createShootingStar() {
-            const star = document.createElement('div');
-            star.className = 'shooting-star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 50 + '%';
-            star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            starsContainer.appendChild(star);
-            setTimeout(() => star.remove(), 4000);
-        }
-        setInterval(createShootingStar, 3000);
+        let clicked = false;
 
-        // ========== ZARRACHALAR ==========
-        const particlesContainer = document.getElementById('particles');
-        const colors = ['rgba(88, 166, 255, 0.5)', 'rgba(63, 185, 80, 0.4)', 'rgba(139, 92, 246, 0.4)'];
-        for (let i = 0; i < 25; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            const size = Math.random() * 8 + 3;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.setProperty('--duration', (Math.random() * 15 + 10) + 's');
-            particle.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
-            particle.style.animationDelay = Math.random() * 10 + 's';
-            particlesContainer.appendChild(particle);
-        }
+        saturn.addEventListener('click', () => {
+            if (clicked) return;
+            clicked = true;
 
-        // Smooth scroll
+            // 1. Saturn chapga suriladi
+            saturn.classList.add('slide-left');
+
+            // 2. Avatar paydo bo'ladi (Saturn tagida)
+            setTimeout(() => {
+                avatarContainer.classList.add('show');
+            }, 400);
+
+            // 3. O'ng tomondan ma'lumotlar chiqadi
+            setTimeout(() => {
+                infoPanel.classList.add('show');
+            }, 600);
+
+            // 4. Intro ekrani yo'qoladi
+            setTimeout(() => {
+                introScreen.classList.add('hidden');
+            }, 2000);
+
+            // 5. Asosiy sayt ko'rinadi
+            setTimeout(() => {
+                mainSite.classList.add('show');
+            }, 2500);
+        });
+
+        // Smooth scroll uchun
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
     </script>
